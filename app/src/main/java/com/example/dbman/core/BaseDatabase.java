@@ -1,6 +1,5 @@
 package com.example.dbman.core;
 
-import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -11,13 +10,14 @@ import com.example.dbman.db.genupdate.schema.*;
 import com.example.dbman.ui.R;
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.jdbc.JdbcDatabaseConnection;
 import com.j256.ormlite.support.ConnectionSource;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class BaseDatabase {
     private static String DATABASE_PATH;
     private static String DATABASE_URL;
     private static String DATABASE_DIR;
-    private ConnectionSource connectionSource;
+    private JdbcConnectionSource connectionSource;
 
     public enum TableNames {
     CheckMntcDetail,
@@ -157,6 +157,10 @@ public class BaseDatabase {
             WorkersDaoImpl.class
     };
 
+    public JdbcConnectionSource getConnectionSource() {
+        return connectionSource;
+    }
+
     private HashMap<String,BaseDaoImpl> daoHashMap = new HashMap<String, BaseDaoImpl>();
 
     private void initDao(ConnectionSource connectionSources){
@@ -234,5 +238,14 @@ public class BaseDatabase {
         return daoHashMap.get(tableName);
     }
 
+    public synchronized Connection getConnection(){
+        try {
+            JdbcDatabaseConnection jdbcDatabaseConnection = (JdbcDatabaseConnection)connectionSource.getReadWriteConnection("");
+            return jdbcDatabaseConnection.getInternalConnection();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }

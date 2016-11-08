@@ -4,6 +4,7 @@ package com.example.dbman.db.genupdate.schema;
 	*	*@author jichen
 	*/
 
+import com.example.dbman.db.core.MyUUID;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
@@ -13,8 +14,8 @@ import java.util.Date;
 import com.example.dbman.db.genupdate.daoimpl.SysParameterDaoImpl;
 @DatabaseTable(tableName = "SysParameter", daoClass =SysParameterDaoImpl.class)
 	public class SysParameter{
-@DatabaseField( columnName ="ParaID",id=true ,canBeNull = false )
-	private UUID paraid;
+@DatabaseField( columnName ="id",id=true ,canBeNull = false )
+	private UUID id;
 @DatabaseField( columnName ="ParentID")
 	private UUID parentid;
 @DatabaseField( columnName ="ParaName")
@@ -22,12 +23,14 @@ import com.example.dbman.db.genupdate.daoimpl.SysParameterDaoImpl;
 @DatabaseField( columnName ="ParaSort")
 	private int parasort;
 
-	public UUID getParaID(){
-		return this.paraid;
+	public UUID getId() {
+		return id;
 	}
-	public void setParaID(UUID ParaID){
-		this.paraid=ParaID;
+
+	public void setId(UUID id) {
+		this.id = id;
 	}
+
 	public UUID getParentID(){
 		return this.parentid;
 	}

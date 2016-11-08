@@ -47,6 +47,5 @@ public class BaseApplication extends Application {
         }catch (Exception e){
             LogUtils.e("ui database error",e);
         }
-
     }
 }

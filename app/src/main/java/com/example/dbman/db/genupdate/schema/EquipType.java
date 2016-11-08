@@ -14,9 +14,9 @@ import java.util.Date;
 import com.example.dbman.db.genupdate.daoimpl.EquipTypeDaoImpl;
 @DatabaseTable(tableName = "EquipType", daoClass =EquipTypeDaoImpl.class)
 	public class EquipType{
-@DatabaseField( columnName ="PkTypeID",id=true ,canBeNull = false, persisterClass = MyUUID.class )
+@DatabaseField( columnName ="PkTypeID",id=true ,canBeNull = false)
 	private UUID pktypeid;
-@DatabaseField( columnName ="SupPkTypeID", persisterClass = MyUUID.class)
+@DatabaseField( columnName ="SupPkTypeID")
 	private UUID suppktypeid;
 @DatabaseField( columnName ="DeptID")
 	private UUID deptid;
@@ -28,8 +28,8 @@ import com.example.dbman.db.genupdate.daoimpl.EquipTypeDaoImpl;
 	private String typename;
 @DatabaseField( columnName ="TypeCode")
 	private String typecode;
-@DatabaseField( columnName ="Unit")
-	private UUID unit;
+@DatabaseField( columnName ="Unit", foreign = true)
+	private SysParameter unit;
 @DatabaseField( columnName ="Scale")
 	private BigDecimal scale;
 @DatabaseField( columnName ="IsEnable")
@@ -85,10 +85,10 @@ import com.example.dbman.db.genupdate.daoimpl.EquipTypeDaoImpl;
 	public void setTypeCode(String TypeCode){
 		this.typecode=TypeCode;
 	}
-	public UUID getUnit(){
+	public SysParameter getUnit(){
 		return this.unit;
 	}
-	public void setUnit(UUID Unit){
+	public void setUnit(SysParameter Unit){
 		this.unit=Unit;
 	}
 	public BigDecimal getScale(){

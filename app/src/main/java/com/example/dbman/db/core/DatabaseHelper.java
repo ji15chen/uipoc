@@ -3,7 +3,6 @@ package com.example.dbman.db.core;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.sql.SQLException;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,9 +11,7 @@ import android.util.Log;
 import com.example.dbman.core.BaseApplication;
 import com.example.dbman.ui.R;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
-import com.j256.ormlite.table.TableUtils;
 
 /**
  * Database helper class used to manage the creation and upgrading of your database. This class also usually provides
@@ -23,7 +20,7 @@ import com.j256.ormlite.table.TableUtils;
 @Deprecated
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
-	public static final String DATABASE_NAME="dbman.db";
+	public static final String DATABASE_NAME="dbman_bak.dbk.db";
 	// any time you make changes to your database objects, you may have to increase the database version
 	private static final int DATABASE_VERSION = 1;
 
@@ -47,7 +44,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		File filepath = new File(DATABASE_PATH);
 		if (!filepath.exists()) {//如果文件不存在
 			try {
-				InputStream inputStream = BaseApplication.getApp().getResources().openRawResource(R.raw.dbman);//将raw中的test.db放入输入流中
+				InputStream inputStream = BaseApplication.getApp().getResources().openRawResource(R.raw.dbman_bak);//将raw中的test.db放入输入流中
 				FileOutputStream fileOutputStream = new FileOutputStream(DATABASE_PATH);//将新的文件放入输出流中
 				byte[] buff = new byte[8192];
 				int len = 0;
